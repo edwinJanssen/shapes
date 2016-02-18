@@ -4,6 +4,7 @@ require_once('vendor/autoload.php');
 
 use Shapes\Entities\CircleRepository;
 use Shapes\Entities\SquareRepository;
+use Shapes\Services\AreaCalculator;
 
 // Get circles
 $circleRepository = new CircleRepository();
@@ -13,14 +14,6 @@ $circles          = $circleRepository->getCircles();
 $squareRepository = new SquareRepository();
 $squares          = $squareRepository->getSquares();
 
-// Get area for shapes
-$areas = [];
-foreach ($circles as $circle) {
-    $areas[] = pi() * pow($circle->getRadius(), 2);
-}
+$areaCalculator = new AreaCalculator(array_merge($circles, $squares));
 
-foreach ($squares as $square) {
-    $areas[] = pow($square->getLength(), 2);
-}
-
-printf('<h1>Sum of the areas of provided shapes: %s</h1>', array_sum($areas));
+echo $areaCalculator->output();
