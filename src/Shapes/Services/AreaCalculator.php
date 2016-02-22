@@ -30,25 +30,13 @@ class AreaCalculator
     }
 
     /**
-     * Get output for required area
-     *
-     * @author Edwin Janssen
-     *
-     * @return string
-     */
-    public function output()
-    {
-        return sprintf('<h1>Sum of the areas of provided shapes: %s</h1>', $this->sum());
-    }
-
-    /**
      * Sum shape areas
      *
      * @author Edwin Janssen
      *
      * @return number
      */
-    private function sum()
+    public function sum()
     {
         $areas = [];
 
