@@ -2,8 +2,8 @@
 
 namespace Shapes\Services;
 
-use Shapes\Entities\Circle;
-use Shapes\Entities\Square;
+use Shapes\Exceptions\AreaCalculatorInvalidShapeException;
+use Shapes\Interfaces\Shape;
 
 /**
  * Class AreaCalculator
@@ -15,14 +15,14 @@ use Shapes\Entities\Square;
 class AreaCalculator
 {
     /**
-     * @var array
+     * @var Shape[]
      */
     private $shapes;
 
     /**
      * AreaCalculator constructor.
      *
-     * @param array $shapes
+     * @param Shape[] $shapes
      */
     public function __construct(array $shapes)
     {
@@ -35,17 +35,20 @@ class AreaCalculator
      * @author Edwin Janssen
      *
      * @return number
+     * @throws AreaCalculatorInvalidShapeException
      */
     public function sum()
     {
         $areas = [];
 
         foreach ($this->shapes as $shape) {
-            if ($shape instanceof Square) {
-                $areas[] = pow($shape->getLength(), 2);
-            } elseif ($shape instanceof Circle) {
-                $areas[] = pi() * pow($shape->getRadius(), 2);
+            if ($shape instanceof Shape) {
+                $areas[] = $shape->getArea();
+
+                continue;
             }
+
+            throw new AreaCalculatorInvalidShapeException();
         }
 
         return array_sum($areas);

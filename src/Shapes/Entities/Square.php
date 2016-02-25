@@ -2,6 +2,8 @@
 
 namespace Shapes\Entities;
 
+use Shapes\Interfaces\Shape;
+
 /**
  * Class Square
  *
@@ -9,7 +11,7 @@ namespace Shapes\Entities;
  *
  * @package Shapes\Entities
  */
-class Square
+class Square implements Shape
 {
     /**
      * @var float
@@ -40,5 +42,16 @@ class Square
     public function setLength($length)
     {
         $this->length = $length;
+    }
+
+    /**
+     * Calculate the area for a square
+     *
+     * @author Edwin Janssen
+     *
+     * @return number
+     */
+    public function getArea() {
+        return pow($this->getLength(), 2);
     }
 }

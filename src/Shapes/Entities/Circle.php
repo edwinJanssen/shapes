@@ -2,6 +2,8 @@
 
 namespace Shapes\Entities;
 
+use Shapes\Interfaces\Shape;
+
 /**
  * Class Circle
  *
@@ -9,7 +11,7 @@ namespace Shapes\Entities;
  *
  * @package Shapes\Entities
  */
-class Circle
+class Circle implements Shape
 {
     /**
      * @var float
@@ -40,5 +42,17 @@ class Circle
     public function setRadius($radius)
     {
         $this->radius = $radius;
+    }
+
+    /**
+     * Calculate the area for a circle
+     *
+     * @author Edwin Janssen
+     *
+     * @return float
+     */
+    public function getArea()
+    {
+        return pi() * pow($this->getRadius(), 2);
     }
 }
