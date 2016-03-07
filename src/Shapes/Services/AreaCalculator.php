@@ -3,7 +3,7 @@
 namespace Shapes\Services;
 
 use Shapes\Exceptions\AreaCalculatorInvalidShapeException;
-use Shapes\Interfaces\Shape;
+use Shapes\Interfaces\ManageShape;
 
 /**
  * Class AreaCalculator
@@ -15,14 +15,14 @@ use Shapes\Interfaces\Shape;
 class AreaCalculator
 {
     /**
-     * @var Shape[]
+     * @var ManageShape[]
      */
     private $shapes;
 
     /**
      * AreaCalculator constructor.
      *
-     * @param Shape[] $shapes
+     * @param ManageShape[] $shapes
      */
     public function __construct(array $shapes)
     {
@@ -42,8 +42,8 @@ class AreaCalculator
         $areas = [];
 
         foreach ($this->shapes as $shape) {
-            if ($shape instanceof Shape) {
-                $areas[] = $shape->getArea();
+            if ($shape instanceof ManageShape) {
+                $areas[] = $shape->calculate();
 
                 continue;
             }

@@ -2,6 +2,7 @@
 
 namespace Shapes\Entities;
 
+use Shapes\Interfaces\ManageShape;
 use Shapes\Interfaces\Shape;
 
 /**
@@ -11,7 +12,7 @@ use Shapes\Interfaces\Shape;
  *
  * @package Shapes\Entities
  */
-class Square implements Shape
+class Square implements Shape, ManageShape
 {
     /**
      * @var float
@@ -53,5 +54,17 @@ class Square implements Shape
      */
     public function getArea() {
         return pow($this->getLength(), 2);
+    }
+
+    /**
+     * Calculate
+     *
+     * @author Edwin Janssen
+     *
+     * @return number
+     */
+    public function calculate()
+    {
+        return $this->getArea();
     }
 }

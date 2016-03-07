@@ -2,6 +2,7 @@
 
 namespace Shapes\Entities;
 
+use Shapes\Interfaces\ManageShape;
 use Shapes\Interfaces\Shape;
 
 /**
@@ -11,7 +12,7 @@ use Shapes\Interfaces\Shape;
  *
  * @package Shapes\Entities
  */
-class Circle implements Shape
+class Circle implements Shape, ManageShape
 {
     /**
      * @var float
@@ -54,5 +55,17 @@ class Circle implements Shape
     public function getArea()
     {
         return pi() * pow($this->getRadius(), 2);
+    }
+
+    /**
+     * Calculate
+     *
+     * @author Edwin Janssen
+     *
+     * @return number
+     */
+    public function calculate()
+    {
+        return $this->getArea();
     }
 }
