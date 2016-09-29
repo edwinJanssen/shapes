@@ -4,15 +4,16 @@ require_once('vendor/autoload.php');
 
 use Shapes\Entities\CircleRepository;
 use Shapes\Entities\SquareRepository;
+use Shapes\Services\AdoConnection;
 use Shapes\Services\AreaCalculator;
 use Shapes\Services\AreaOutputter;
 
 // Get circles
-$circleRepository = new CircleRepository();
+$circleRepository = new CircleRepository(new AdoConnection());
 $circles          = $circleRepository->getCircles();
 
 // Get squares
-$squareRepository = new SquareRepository();
+$squareRepository = new SquareRepository(new AdoConnection());
 $squares          = $squareRepository->getSquares();
 
 $areaCalculator = new AreaCalculator(array_merge($circles, $squares));

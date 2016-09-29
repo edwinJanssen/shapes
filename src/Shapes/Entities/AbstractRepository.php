@@ -2,6 +2,8 @@
 
 namespace Shapes\Entities;
 
+use Shapes\Interfaces\DBConnection;
+
 /**
  * Class AbstractRepository
  *
@@ -12,31 +14,19 @@ namespace Shapes\Entities;
 abstract class AbstractRepository
 {
     /**
-     * @var \ADOConnection
+     * @var DBConnection
      */
     protected $db;
 
     /**
      * CircleRepository constructor.
      *
-     * @param bool $debug
+     * @param DBConnection $db
+     * @param bool         $debug
      */
-    public function __construct($debug = false)
+    public function __construct(DBConnection $db, $debug = false)
     {
-        // setup db connection
-        $this->db = ADONewConnection('mysqli');
-        $this->db->SetFetchMode(ADODB_FETCH_ASSOC);
-        $this->db->NConnect(
-            'localhost',
-            'root',
-            '',
-            'shapes'
-        );
-        if (!$this->db->IsConnected()) {
-            die("Cannot connect to shapes database, please warn the administrator");
-        }
-        $this->db->Execute("SET NAMES 'utf8'");
-        $this->db->debug = $debug;
-
+        $this->db = $db;
+        $this->db->connect();
     }
 }
